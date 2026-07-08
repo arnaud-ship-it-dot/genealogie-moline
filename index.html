@@ -112,13 +112,18 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--parch);color:v
 #nav{position:fixed;top:0;left:0;right:0;height:64px;z-index:200;background:linear-gradient(180deg,#1f160a 0%,var(--ink) 60%,#120c06 100%);display:flex;align-items:center;padding:0 28px;gap:18px;border-bottom:1px solid #000;box-shadow:0 2px 0 var(--gold),0 4px 18px rgba(0,0,0,.35);}
 #nav::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-l),var(--gold),var(--gold-l),transparent);opacity:.5;}
 #nav .crest{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:.05em;background:radial-gradient(circle at 30% 30%,rgba(184,151,58,.18),transparent 70%);flex-shrink:0;}
-#nav h1{font-family:'Cinzel',serif;font-size:16px;font-weight:500;color:var(--gold);letter-spacing:.22em;flex:1;text-shadow:0 1px 0 #000;}
+#nav h1{font-family:'Cinzel',serif;font-size:16px;font-weight:500;color:var(--gold);letter-spacing:.22em;flex-shrink:0;white-space:nowrap;text-shadow:0 1px 0 #000;}
 #nav h1 .sub{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;letter-spacing:.08em;color:var(--sepia-l);font-weight:300;margin-top:1px;}
 .ntab{padding:8px 16px;font-family:'Cinzel',serif;font-size:10.5px;letter-spacing:.18em;color:var(--sepia-l);border:none;background:transparent;cursor:pointer;position:relative;transition:color .22s;white-space:nowrap;text-transform:uppercase;}
 .ntab::after{content:'';position:absolute;left:50%;right:50%;bottom:-2px;height:2px;background:var(--gold);transition:left .22s,right .22s;}
 .ntab:hover{color:var(--gold-l);}
 .ntab.on{color:var(--gold);}
 .ntab.on::after{left:16%;right:16%;}
+#ntabs{display:flex;align-items:center;gap:2px;margin-left:auto;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+#ntabs::-webkit-scrollbar{display:none;}
+.ntab{flex-shrink:0;}
+#sw,#thbtn{flex-shrink:0;}
+@media (max-width:1360px){#nav h1 .sub{display:none;}#nav h1{font-size:14px;letter-spacing:.15em;}}
 #sw{position:relative;}
 #si{width:200px;padding:7px 14px 7px 32px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(196,168,130,.35);color:var(--parch);font-family:'EB Garamond',serif;font-size:13px;outline:none;transition:all .25s;box-shadow:inset 0 1px 2px rgba(0,0,0,.4);}
 #si::placeholder{color:var(--sepia-l);font-style:italic;}
@@ -130,7 +135,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--parch);color:v
 .sri .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
 .sri-name{font-size:14px;color:var(--parch-d);}
 .sri-sub{font-size:11px;color:var(--sepia-l);margin-top:1px;}
-.page{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;}
+.page{display:none;position:fixed;top:var(--navh,64px);left:0;right:0;bottom:0;}
 .page.on{display:flex;flex-direction:column;}
 #pg-arbre{overflow:hidden;}
 #bc{background:rgba(245,239,227,.97);backdrop-filter:blur(4px);padding:8px 20px;border-bottom:1px solid var(--parch-dp);display:flex;align-items:center;gap:8px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:.1em;flex-shrink:0;flex-wrap:wrap;}
@@ -263,7 +268,8 @@ body.dark #minimap{background:rgba(26,20,16,.92);}
 #mm-label{position:absolute;top:2px;left:4px;font-family:'Cinzel',serif;font-size:7px;letter-spacing:.15em;color:var(--sepia);text-transform:uppercase;}
 /* ==== Responsive mobile ==== */
 @media (max-width:768px){
-  #nav{height:56px;padding:0 14px;gap:8px;}
+  #nav{height:auto;min-height:56px;flex-wrap:wrap;padding:6px 12px 4px;gap:6px;row-gap:4px;}
+  #ntabs{order:10;flex-basis:100%;margin-left:0;}
   #nav .crest{width:30px;height:30px;font-size:12px;}
   #nav h1{font-size:12px;letter-spacing:.15em;}
   #nav h1 .sub{display:none;}
@@ -273,7 +279,7 @@ body.dark #minimap{background:rgba(26,20,16,.92);}
   :root{--panel:100%;}
   #tree-main{flex-direction:column;}
   #tree-right{width:100%;max-height:50vh;border-left:none;border-top:1px solid var(--sepia-l);display:none;}
-  #tree-right.open{display:block;position:fixed;top:56px;left:0;right:0;bottom:0;z-index:150;max-height:none;}
+  #tree-right.open{display:block;position:fixed;top:var(--navh,56px);left:0;right:0;bottom:0;z-index:150;max-height:none;}
   #tree-right.open::before{content:'✕ Fermer';position:sticky;top:0;display:block;padding:8px 14px;background:var(--ink);color:var(--gold);font-family:'Cinzel',serif;font-size:10px;letter-spacing:.15em;cursor:pointer;text-align:right;z-index:10;}
   #tree-left{padding:14px 8px 80px;}
   .pcard{min-width:120px;max-width:150px;}
@@ -295,6 +301,7 @@ body.dark #minimap{background:rgba(26,20,16,.92);}
 <nav id="nav">
   <div class="crest">M</div>
   <h1>Généalogie Moline<span class="sub">Six siècles · Trois continents · 304 âmes</span></h1>
+  <div id="ntabs">
   <button class="ntab on" id="tab-arbre" onclick="showPage('arbre')">Arbre</button>
   <button class="ntab" id="tab-map" onclick="showPage('map')">Carte</button>
   <button class="ntab" id="tab-timeline" onclick="showPage('timeline')">Chronologie</button>
@@ -302,6 +309,7 @@ body.dark #minimap{background:rgba(26,20,16,.92);}
   <button class="ntab" id="tab-sepultures" onclick="showPage('sepultures')">Sépultures</button>
   <button class="ntab" id="tab-stats" onclick="showPage('stats')">Statistiques</button>
   <button class="ntab" id="tab-legal" onclick="showPage('legal')">Mentions</button>
+  </div>
   <div id="sw"><input type="text" id="si" placeholder="Rechercher…" autocomplete="off"><div id="sr"></div></div>
   <button id="thbtn" onclick="toggleTheme()" title="Thème clair/sombre">☾</button>
 </nav>
@@ -815,7 +823,9 @@ function buildSepultures(){
 function showPage(pg){
   document.querySelectorAll('.ntab').forEach(function(t){t.classList.remove('on');});
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on');});
-  document.getElementById('tab-'+pg).classList.add('on');
+  var tb=document.getElementById('tab-'+pg);
+  tb.classList.add('on');
+  try{tb.scrollIntoView({block:'nearest',inline:'center'});}catch(e){}
   document.getElementById('pg-'+pg).classList.add('on');
   if(pg==='stats') buildStats();
   if(pg==='map') setTimeout(initMap,100);
@@ -1205,7 +1215,11 @@ function initTreePan(){
     if(!e.target.closest('.pcard')) zTree(0);
   });
 }
+function fixNavH(){
+  document.documentElement.style.setProperty('--navh',document.getElementById('nav').offsetHeight+'px');
+}
 window.addEventListener('load',function(){
+  fixNavH();
   // Adresse de contact assemblée au chargement (limite la récolte par les robots à spam)
   var ml=document.getElementById('mail-link');
   if(ml){var ad=['arnaud','moline'].join('.')+String.fromCharCode(64)+'gmail.com';ml.href='mailto:'+ad;ml.textContent=ad;}
@@ -1215,7 +1229,7 @@ window.addEventListener('load',function(){
   initTreePan();
   initMinimapClick();
   initKeyboard();
-  window.addEventListener('resize',function(){updateMinimapView();});
+  window.addEventListener('resize',function(){fixNavH();updateMinimapView();});
   // Fermer panneau mobile au clic sur ::before (via overlay)
   document.getElementById('tree-right').addEventListener('click',function(e){
     if(window.innerWidth<=768 && e.target===this) this.classList.remove('open');
