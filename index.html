@@ -136,6 +136,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--parch);color:v
 .sri-name{font-size:14px;color:var(--parch-d);}
 .sri-sub{font-size:11px;color:var(--sepia-l);margin-top:1px;}
 .page{display:none;position:fixed;top:var(--navh,64px);left:0;right:0;bottom:0;}
+@supports (height:100dvh){.page{bottom:auto;height:calc(100dvh - var(--navh,64px));}}
 .page.on{display:flex;flex-direction:column;}
 #pg-arbre{overflow:hidden;}
 #bc{background:rgba(245,239,227,.97);backdrop-filter:blur(4px);padding:8px 20px;border-bottom:1px solid var(--parch-dp);display:flex;align-items:center;gap:8px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:.1em;flex-shrink:0;flex-wrap:wrap;}
@@ -206,10 +207,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--parch);color:v
 .fn strong{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.04em;}
 .fd{font-size:11px;color:var(--sepia-l);margin-top:2px;font-style:italic;}
 .floc{font-size:11px;color:var(--sepia);margin-top:1px;}
-.cpg{overflow-y:auto;background:var(--parch);padding:40px 20px;height:100%;}
+.cpg{overflow-y:auto;background:var(--parch);padding:40px 20px 90px;}
 .inn{max-width:700px;margin:0 auto;}
 .inn h2{font-family:'Cinzel',serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:6px;}
-.sub{font-size:13px;color:var(--sepia);font-style:italic;margin-bottom:28px;padding-bottom:14px;border-bottom:1px solid var(--parch-dp);}
+.inn .sub{font-size:13px;color:var(--sepia);font-style:italic;margin-bottom:28px;padding-bottom:14px;border-bottom:1px solid var(--parch-dp);}
 .inn h3{font-family:'Cinzel',serif;font-size:13px;color:var(--ink-l);margin:24px 0 9px;}
 .inn p{font-size:15px;line-height:1.8;color:var(--ink-l);margin-bottom:12px;}
 .otag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:'Cinzel',serif;margin-right:4px;}
@@ -287,7 +288,8 @@ body.dark #minimap{background:rgba(26,20,16,.92);}
   .mono{width:28px;height:28px;font-size:11px;}
   #tree-zoom{right:12px;}
   #minimap{width:120px;height:80px;}
-  .page.cpg{padding:20px 14px;}
+  .page.cpg{padding:20px 14px calc(90px + env(safe-area-inset-bottom));}
+  #pbody{padding-bottom:calc(60px + env(safe-area-inset-bottom));}
   .inn h2{font-size:18px;}
 }
 .tl::before{content:'';position:absolute;left:100px;top:0;bottom:0;width:1px;background:var(--parch-dp);}
